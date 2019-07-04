@@ -33,7 +33,9 @@ Install all the dependencies.
 
 ## Usage
 
-Please provide accounting information.
+- You can use this application to test your neural network architecture
+- You can use Rabbit for educational purposes
+- You can use it to draft your neural network architecture
 
 ---
 
