@@ -1,0 +1,238 @@
+<ConvPopup>:
+    size_hint: None, None
+    size: 400, 400
+    auto_dismiss: False
+
+    BoxLayout:
+        orientation: "vertical"
+        TextInput:
+            id:  in_channels
+            hint_text: 'Number of input channels'
+        TextInput:
+            id: out_channels
+            hint_text: 'Number of output channels'
+        TextInput:
+            id: kernel
+            hint_text: 'Kernel size: must be a tuple or int'
+        TextInput:
+            id: stride
+            hint_text: 'Stride'
+        TextInput:
+            id: padding
+            hint_text: 'Padding'
+
+
+        Button:
+            text: 'Ok'
+            on_release:
+                root.on_release()
+        Button:
+            text: 'Cancel'
+            on_release: root.dismiss()
+
+<MaxPoolPopup>:
+    size_hint: None, None
+    size: 400, 400
+    auto_dismiss: False
+
+    BoxLayout:
+        orientation: "vertical"
+        TextInput:
+            id: kernel
+            hint_text: 'Kernel size: must be a tuple or int'
+        TextInput:
+            id: stride
+            hint_text: 'Stride'
+        TextInput:
+            id: padding
+            hint_text: 'Padding'
+
+
+        Button:
+            text: 'Ok'
+            on_release:
+                root.on_release()
+        Button:
+            text: 'Cancel'
+            on_release: root.dismiss()
+
+<LinearPopup>:
+    size_hint: None, None
+    size: 400, 400
+    auto_dismiss: False
+
+    BoxLayout:
+        orientation: "vertical"
+        TextInput:
+            id: in_features
+            hint_text: 'Number of input features'
+        TextInput:
+            id: out_features
+            hint_text: 'Number of output features'
+        TextInput:
+            id: bias
+            hint_text: 'Bias: True or False'
+
+
+        Button:
+            text: 'Ok'
+            on_release:
+                root.on_release()
+        Button:
+            text: 'Cancel'
+            on_release: root.dismiss()
+
+
+
+
+
+<MessagePopup>:
+    size_hint: None, None
+    size: 400, 400
+    auto_dismiss: False
+
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            id: message
+
+        Button:
+            size_hint: 1, 0.2
+            text: 'Ok'
+            on_release: root.dismiss()
+
+
+<CustomButton@Button>
+    on_press: print(self.text)
+
+<LayerDesigner>:
+    orientation: 'horizontal'
+
+    BoxLayout:
+        orientation: 'vertical'
+
+        Label:
+            text: 'Layers:'
+            size_hint_y: None
+            height: 35
+            bold: True
+            font_size: 23
+
+        RecycleView:
+            id: rv
+            viewclass: 'CustomButton'
+            key_selection: True
+            RecycleBoxLayout:
+                default_size: None, dp(56)
+                default_size_hint: 1.0, None
+                size_hint_y: None
+                height: self.minimum_height
+                orientation: 'vertical'
+                multiselect: True
+                touch_multiselect: True
+    BoxLayout:
+
+        orientation: 'vertical'
+
+        Label:
+            text: 'Options:'
+            size_hint_y: None
+            height: 35
+            bold: True
+            font_size: 23
+
+        GridLayout:
+            rows: 4
+            Button:
+                id: add_conv
+                text: 'Add a Conv Layer'
+                on_release:
+                    root.add_conv()
+
+
+            Button:
+                id: add_maxpool
+                text: 'Add a MaxPool Layer'
+                on_release: root.add_maxpool()
+
+            Button:
+                id: add_linear
+                text: 'Add a Linear Layer'
+                on_release: root.add_linear()
+
+            Button:
+                id: add_relu
+                text: 'RELU Activation'
+                on_release: root.add_relu()
+
+            Button:
+                id: remove_module
+                text: 'Sigmoid Activation'
+                on_release: root.add_sigmoid()
+
+            Button:
+                id: add_tanh
+                text: 'Tanh Activation'
+                on_release: root.add_tanh()
+
+            Button:
+                id: flatten
+                text: 'Flatten'
+                on_release: root.add_flatten()
+
+            Button:
+                id: remove_module
+                text: 'Remove Last Layer'
+                on_release: root.remove_last_layer()
+
+
+
+
+        GridLayout:
+            rows: 6
+            TextInput:
+                id: batch_size
+                text: '16'
+                hint_text: 'Batch size'
+
+            TextInput:
+                id: lr
+                text: '0.0005'
+                hint_text: 'Learning rate'
+
+            TextInput:
+                id: num_epochs
+                text: '3'
+                hint_text: 'Number of epochs'
+
+
+            BoxLayout:
+                Label:
+                    text: 'CUDA'
+                CheckBox:
+                    id: cuda
+
+            BoxLayout:
+                Label:
+                    text: 'Shuffle'
+                CheckBox:
+                    id: shuffle
+
+
+
+
+        BoxLayout:
+            TextInput:
+                id: data_dir
+                hint_text: 'Data directory'
+
+            Button:
+                id: train
+                text: 'Train'
+                on_release: root.train()
+
+        Label:
+            id: console
+            text: 'Training has not started yet.'
+
+
